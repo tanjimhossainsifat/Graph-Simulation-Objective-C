@@ -15,7 +15,7 @@
 		0E2F0F501FFE7258000A203C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2F0F4F1FFE7258000A203C /* main.m */; };
 		0E2F0F5C1FFE73D5000A203C /* Vertex.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2F0F5B1FFE73D5000A203C /* Vertex.m */; };
 		0E2F0F5F1FFE7465000A203C /* Edge.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2F0F5E1FFE7465000A203C /* Edge.m */; };
-		0E2F0F621FFE752F000A203C /* VertexPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2F0F611FFE752F000A203C /* VertexPool.m */; };
+		0E2F0F651FFE836B000A203C /* Graph.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2F0F641FFE836B000A203C /* Graph.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,8 +33,8 @@
 		0E2F0F5B1FFE73D5000A203C /* Vertex.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Vertex.m; sourceTree = "<group>"; };
 		0E2F0F5D1FFE7465000A203C /* Edge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Edge.h; sourceTree = "<group>"; };
 		0E2F0F5E1FFE7465000A203C /* Edge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Edge.m; sourceTree = "<group>"; };
-		0E2F0F601FFE752F000A203C /* VertexPool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VertexPool.h; sourceTree = "<group>"; };
-		0E2F0F611FFE752F000A203C /* VertexPool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VertexPool.m; sourceTree = "<group>"; };
+		0E2F0F631FFE836B000A203C /* Graph.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Graph.h; sourceTree = "<group>"; };
+		0E2F0F641FFE836B000A203C /* Graph.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Graph.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,8 +88,8 @@
 				0E2F0F5B1FFE73D5000A203C /* Vertex.m */,
 				0E2F0F5D1FFE7465000A203C /* Edge.h */,
 				0E2F0F5E1FFE7465000A203C /* Edge.m */,
-				0E2F0F601FFE752F000A203C /* VertexPool.h */,
-				0E2F0F611FFE752F000A203C /* VertexPool.m */,
+				0E2F0F631FFE836B000A203C /* Graph.h */,
+				0E2F0F641FFE836B000A203C /* Graph.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -170,7 +170,7 @@
 				0E2F0F5C1FFE73D5000A203C /* Vertex.m in Sources */,
 				0E2F0F501FFE7258000A203C /* main.m in Sources */,
 				0E2F0F421FFE7258000A203C /* AppDelegate.m in Sources */,
-				0E2F0F621FFE752F000A203C /* VertexPool.m in Sources */,
+				0E2F0F651FFE836B000A203C /* Graph.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

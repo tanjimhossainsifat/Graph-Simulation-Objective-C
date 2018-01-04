@@ -10,5 +10,6 @@
 
 @interface Vertex : NSObject
 
-@property (nonatomic, strong) NSString *id;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, assign) int id;
 @end
