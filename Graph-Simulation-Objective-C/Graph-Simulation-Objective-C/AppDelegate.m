@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "InputViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +18,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    InputViewController *inputVC = [[InputViewController alloc] init];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController: inputVC];
+    inputVC.navigationController = navController;
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.rootViewController = navController;
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
