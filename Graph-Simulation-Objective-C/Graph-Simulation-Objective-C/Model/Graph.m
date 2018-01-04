@@ -16,6 +16,8 @@
     int vertexCounter;
 }
 
+#pragma mark - Initialization methods
+
 -(id) init {
     self = [super init];
     vertexCounter = 0;
