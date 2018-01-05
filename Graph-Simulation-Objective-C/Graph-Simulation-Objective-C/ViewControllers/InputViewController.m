@@ -36,4 +36,20 @@
 }
 */
 
+- (IBAction)onButtonApply:(id)sender {
+    
+    NSUInteger vertextNumber = [self.vertexNumberTextField.text integerValue];
+    BOOL isWeightedGraph = [self.isWeightedGraphSwitch isSelected];
+    NSUInteger selectedVertexType = [self.vertexTypeSegmentControl selectedSegmentIndex];
+    
+    if(!vertextNumber || vertextNumber>8) {
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Please enter number of vertex (Maximum 8 allowed)" preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:okAction];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self presentViewController:alert animated:YES completion:nil];
+        });
+        return;
+    }
+}
 @end

@@ -11,4 +11,10 @@
 
 @property (nonatomic, strong) UINavigationController *navigationController;
 
+@property (weak, nonatomic) IBOutlet UITextField *vertexNumberTextField;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *vertexTypeSegmentControl;
+@property (weak, nonatomic) IBOutlet UISwitch *isWeightedGraphSwitch;
+
+
+- (IBAction)onButtonApply:(id)sender;
 @end
