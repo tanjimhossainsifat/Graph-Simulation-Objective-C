@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DrawGraphViewController">
+            <connections>
+                <outlet property="instructionLabel" destination="klr-ww-GNA" id="mKc-qv-iCD"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="viewForDrawing" destination="4hU-2Z-0BW" id="eCI-Wa-ekI"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Draw Graph" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kr8-bv-MYR">
+                    <rect key="frame" x="142" y="40" width="91" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="klr-ww-GNA">
+                    <rect key="frame" x="166" y="91" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4hU-2Z-0BW">
+                    <rect key="frame" x="37.5" y="132" width="300" height="300"/>
+                    <color key="backgroundColor" red="1" green="0.9710336637988165" blue="0.65027968014017568" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="300" id="N1t-zC-Uyo"/>
+                        <constraint firstAttribute="height" constant="300" id="h6n-Fr-8ZU"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mlh-42-mOy">
+                    <rect key="frame" x="163" y="452" width="49" height="30"/>
+                    <state key="normal" title="Submit"/>
+                    <connections>
+                        <action selector="onButtonSubmit:" destination="-1" eventType="touchUpInside" id="97c-e9-mmI"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="mlh-42-mOy" firstAttribute="top" secondItem="4hU-2Z-0BW" secondAttribute="bottom" constant="20" id="1cA-a3-6rX"/>
+                <constraint firstItem="mlh-42-mOy" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="1qS-wh-kvQ"/>
+                <constraint firstItem="Kr8-bv-MYR" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="20" id="3Z9-NJ-sPv"/>
+                <constraint firstItem="klr-ww-GNA" firstAttribute="centerX" secondItem="Kr8-bv-MYR" secondAttribute="centerX" id="KFC-bj-SmJ"/>
+                <constraint firstItem="klr-ww-GNA" firstAttribute="top" secondItem="Kr8-bv-MYR" secondAttribute="bottom" constant="30" id="OzC-Ua-jhX"/>
+                <constraint firstItem="Kr8-bv-MYR" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="Z6Q-CY-5Uz"/>
+                <constraint firstItem="4hU-2Z-0BW" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="ezC-c9-CY7"/>
+                <constraint firstItem="4hU-2Z-0BW" firstAttribute="top" secondItem="klr-ww-GNA" secondAttribute="bottom" constant="20" id="s6R-g4-7Ou"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+        </view>
+    </objects>
+</document>

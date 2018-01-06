@@ -7,6 +7,7 @@
 //
 
 #import "InputViewController.h"
+#import "DrawGraphViewController.h"
 
 @interface InputViewController ()
 
@@ -51,5 +52,18 @@
         });
         return;
     }
+    
+    DrawGraphViewController *drawGraphVC = [[DrawGraphViewController alloc] init];
+    drawGraphVC.navigationController = self.navigationController;
+    drawGraphVC.numberOfVertex = (int) vertextNumber;
+    drawGraphVC.isWeightedGraph = isWeightedGraph;
+    if(selectedVertexType == 0) {
+        drawGraphVC.vertexNameType = VertexNameTypeNumerical;
+    }
+    else {
+        drawGraphVC.vertexNameType = VertexNameTypeAlphabetical;
+    }
+    
+    [self.navigationController pushViewController:drawGraphVC animated:YES];
 }
 @end

@@ -51,7 +51,7 @@
                     <rect key="frame" x="176" y="140" width="179" height="29"/>
                     <segments>
                         <segment title="Numerical"/>
-                        <segment title="Alphabatical"/>
+                        <segment title="Alphabetical"/>
                     </segments>
                 </segmentedControl>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weighted Graph?" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S9V-QD-QhQ">

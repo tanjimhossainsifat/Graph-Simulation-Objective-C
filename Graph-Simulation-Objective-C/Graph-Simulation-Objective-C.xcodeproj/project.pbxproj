@@ -16,6 +16,8 @@
 		0E2F0F651FFE836B000A203C /* Graph.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2F0F641FFE836B000A203C /* Graph.m */; };
 		0E2F0F6B1FFEAFF4000A203C /* InputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2F0F691FFEAFF4000A203C /* InputViewController.m */; };
 		0E2F0F6C1FFEAFF4000A203C /* InputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E2F0F6A1FFEAFF4000A203C /* InputViewController.xib */; };
+		0EFB8C9A1FFF78EB005BEBAF /* DrawGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EFB8C981FFF78EB005BEBAF /* DrawGraphViewController.m */; };
+		0EFB8C9B1FFF78EB005BEBAF /* DrawGraphViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EFB8C991FFF78EB005BEBAF /* DrawGraphViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +37,9 @@
 		0E2F0F681FFEAFF4000A203C /* InputViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InputViewController.h; sourceTree = "<group>"; };
 		0E2F0F691FFEAFF4000A203C /* InputViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InputViewController.m; sourceTree = "<group>"; };
 		0E2F0F6A1FFEAFF4000A203C /* InputViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InputViewController.xib; sourceTree = "<group>"; };
+		0EFB8C971FFF78EB005BEBAF /* DrawGraphViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrawGraphViewController.h; sourceTree = "<group>"; };
+		0EFB8C981FFF78EB005BEBAF /* DrawGraphViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrawGraphViewController.m; sourceTree = "<group>"; };
+		0EFB8C991FFF78EB005BEBAF /* DrawGraphViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DrawGraphViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +103,9 @@
 				0E2F0F681FFEAFF4000A203C /* InputViewController.h */,
 				0E2F0F691FFEAFF4000A203C /* InputViewController.m */,
 				0E2F0F6A1FFEAFF4000A203C /* InputViewController.xib */,
+				0EFB8C971FFF78EB005BEBAF /* DrawGraphViewController.h */,
+				0EFB8C981FFF78EB005BEBAF /* DrawGraphViewController.m */,
+				0EFB8C991FFF78EB005BEBAF /* DrawGraphViewController.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -163,6 +171,7 @@
 				0E2F0F4D1FFE7258000A203C /* LaunchScreen.storyboard in Resources */,
 				0E2F0F4A1FFE7258000A203C /* Assets.xcassets in Resources */,
 				0E2F0F6C1FFEAFF4000A203C /* InputViewController.xib in Resources */,
+				0EFB8C9B1FFF78EB005BEBAF /* DrawGraphViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,6 +188,7 @@
 				0E2F0F501FFE7258000A203C /* main.m in Sources */,
 				0E2F0F421FFE7258000A203C /* AppDelegate.m in Sources */,
 				0E2F0F651FFE836B000A203C /* Graph.m in Sources */,
+				0EFB8C9A1FFF78EB005BEBAF /* DrawGraphViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
