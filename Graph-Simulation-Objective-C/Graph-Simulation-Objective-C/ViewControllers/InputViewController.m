@@ -40,7 +40,7 @@
 - (IBAction)onButtonApply:(id)sender {
     
     NSUInteger vertextNumber = [self.vertexNumberTextField.text integerValue];
-    BOOL isWeightedGraph = [self.isWeightedGraphSwitch isSelected];
+    BOOL isWeightedGraph = [self.isWeightedGraphSwitch isOn];
     NSUInteger selectedVertexType = [self.vertexTypeSegmentControl selectedSegmentIndex];
     
     if(!vertextNumber || vertextNumber>8) {
