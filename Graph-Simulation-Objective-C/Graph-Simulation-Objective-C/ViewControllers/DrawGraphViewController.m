@@ -18,6 +18,8 @@
     UIButton *firstVertexButton;
     UIButton *secondVertexButton;
     NSMutableDictionary *edgeDic;
+    NSMutableArray *vertexButtonList;
+    NSMutableDictionary *shapeLayerDic;
 }
 
 @synthesize navigationController = _navigationController;
@@ -28,8 +30,52 @@
     self.instructionLabel.hidden = YES;
     isFirstVertexSelected = NO;
     edgeDic = [[NSMutableDictionary alloc] init];
+    vertexButtonList = [[NSMutableArray alloc] initWithCapacity:8];
+    shapeLayerDic = [[NSMutableDictionary alloc] init];
     
     [self createVertexButtons];
+
+    
+}
+
+
+- (void) drawEdgesFromVertex:(int)fromVertex ToVertex:(int)toVertex {
+    
+    UIButton *fromVertexButton = (UIButton *)[vertexButtonList objectAtIndex:fromVertex];
+    UIButton *toVertexButton = (UIButton *)[vertexButtonList objectAtIndex:toVertex];
+    
+    CGPoint firstPoint = CGPointMake(fromVertexButton.frame.origin.x+fromVertexButton.frame.size.width/2, fromVertexButton.frame.origin.y+fromVertexButton.frame.size.height/2);
+    CGPoint secondPoint = CGPointMake(toVertexButton.frame.origin.x+toVertexButton.frame.size.width/2, toVertexButton.frame.origin.y+toVertexButton.frame.size.height/2);
+    CGPoint controlPoint = [self getQuadCurveControlPointForFirstPoint:firstPoint andSecondPoint:secondPoint];
+    
+    UIBezierPath *edgePath = [UIBezierPath bezierPath];
+    [edgePath moveToPoint:firstPoint];
+    [edgePath addQuadCurveToPoint:secondPoint controlPoint:controlPoint];
+    
+    CAShapeLayer *shapeLayer = [[CAShapeLayer alloc] init];
+    shapeLayer.path = edgePath.CGPath;
+    shapeLayer.lineWidth = 2.0;
+    [shapeLayer setStrokeColor:[UIColor redColor].CGColor];
+    [shapeLayer setFillColor:[UIColor clearColor].CGColor];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.viewForDrawing.layer addSublayer:shapeLayer];
+    });
+    NSString *shapeLayerDicKey = [NSString stringWithFormat:@"%d->%d",fromVertex,toVertex];
+    [shapeLayerDic setObject:shapeLayer forKey:shapeLayerDicKey];
+    
+}
+
+
+-(void) eraseEdgeFromVertex:(int)fromVertex ToVertex:(int)toVertex {
+    NSString *shapeLayerDicKey = [NSString stringWithFormat:@"%d->%d",fromVertex,toVertex];
+    CAShapeLayer *shapeLayer = [shapeLayerDic objectForKey:shapeLayerDicKey];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if(shapeLayer) [shapeLayer removeFromSuperlayer];
+    });
+    
+    if(shapeLayer) [shapeLayerDic removeObjectForKey:shapeLayerDicKey];
     
 }
 
@@ -49,6 +95,8 @@
 */
 
 -(void) createVertexButtons {
+    
+    [vertexButtonList removeAllObjects];
     
     for (int i=0;i<_numberOfVertex;i++) {
         float width = self.viewForDrawing.frame.size.width;
@@ -78,6 +126,8 @@
         
         vertexButton.tag = i;
         
+        [vertexButtonList insertObject:vertexButton atIndex:i];
+        
         [vertexButton addTarget:self action:@selector(onButtonVertexButton:) forControlEvents:UIControlEventTouchUpInside];
         
         [self.viewForDrawing addSubview:vertexButton];
@@ -103,7 +153,7 @@
         [firstVertexButton setSelected:NO];
         secondVertexButton = vertexButton;
         
-        [self checkEdgeAndModifyFromVertex1:firstVertexButton.tag ToVertex2:secondVertexButton.tag];
+        if(firstVertexButton != secondVertexButton)[self checkEdgeAndModifyFromVertex1:firstVertexButton.tag ToVertex2:secondVertexButton.tag];
         
     }
     
@@ -153,6 +203,7 @@
         
         if(!self.isWeightedGraph) {
             [edgeDic setValue:@"1" forKey:edgeDicKey]; //For unweighted graph, weight is fixed
+            [self drawEdgesFromVertex:vertex1 ToVertex:vertex2];
         }
         else {
             [self showPopupToInsertEdgeWeightFromVertex:vertex1 ToVertex:vertex2 WithError:nil];
@@ -184,6 +235,7 @@
             else {
                 NSString *edgeDicKey = [NSString stringWithFormat:@"%d->%d",vertex1,vertex2];
                 [edgeDic setObject:[NSString stringWithFormat:@"%ld",(long)number] forKey:edgeDicKey];
+                [self drawEdgesFromVertex:vertex1 ToVertex:vertex2];
             }
         }
         else {
@@ -229,6 +281,7 @@
             else {
                 NSString *edgeDicKey = [NSString stringWithFormat:@"%d->%d",vertex1,vertex2];
                 [edgeDic setObject:[NSString stringWithFormat:@"%ld",(long)number] forKey:edgeDicKey];
+                [self drawEdgesFromVertex:vertex1 ToVertex:vertex2];
             }
         }
         else {
@@ -258,6 +311,7 @@
     UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         NSString *edgeDicKey = [NSString stringWithFormat:@"%d->%d",vertex1,vertex2];
         [edgeDic removeObjectForKey:edgeDicKey];
+        [self eraseEdgeFromVertex:vertex1 ToVertex:vertex2];
     }];
     UIAlertAction *noAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:nil];
     
@@ -267,5 +321,50 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [self presentViewController:alert animated:YES completion:nil];
     });
+}
+
+-(CGPoint) getQuadCurveControlPointForFirstPoint:(CGPoint)firstPoint andSecondPoint:(CGPoint)secondPoint {
+    
+    if(firstPoint.y < secondPoint.y) {//first at top, second at bottom
+        
+        if(firstPoint.x < secondPoint.x) {//first at left, second at right
+            
+            return CGPointMake(firstPoint.x, secondPoint.y);
+        }
+        else if(firstPoint.x > secondPoint.x) {//first at right, second at left
+            return CGPointMake(secondPoint.x, firstPoint.y);
+        }
+        else {//first and second both at same width
+            return CGPointMake(firstPoint.x - 100, (firstPoint.y + secondPoint.y)/2);
+        }
+        
+    }
+    else if(firstPoint.y > secondPoint.y) {//first at bottom, second at bottom
+        
+        if(firstPoint.x < secondPoint.x) {//first at left, second at right
+            
+            return CGPointMake(secondPoint.x, firstPoint.y);
+        }
+        else if(firstPoint.x > secondPoint.x) {//first at right, second at left
+            return CGPointMake(firstPoint.x, secondPoint.y);
+        }
+        else {//first and second both at same width
+            return CGPointMake(firstPoint.x + 100, (firstPoint.y + secondPoint.y)/2);
+        }
+    }
+    else {//first and second both are at same height
+        
+        if(firstPoint.x < secondPoint.x) {//first at left, second at right
+            
+            return CGPointMake((firstPoint.x+secondPoint.x)/2, secondPoint.y + 100);
+        }
+        else if(firstPoint.x > secondPoint.x) {//first at right, second at left
+            return CGPointMake((firstPoint.x+secondPoint.x)/2, secondPoint.y - 100);
+        }
+        else {//first and second both at same width
+            return CGPointMake(firstPoint.x + 100, firstPoint.y);
+        }
+        
+    }
 }
 @end
