@@ -7,6 +7,7 @@
 //
 
 #import "DrawGraphViewController.h"
+#import "Graph.h"
 
 @interface DrawGraphViewController ()
 
@@ -418,6 +419,23 @@
 }
 
 - (void) initiateGraphWithRoot:(int) rootVertex {
+    
+    Graph *G = [[Graph alloc] init];
+    
+    for (NSString *edgeString in edgeDic.allKeys) {
+        if(edgeString && edgeString.length>0) {
+            NSArray *edgeStringArray = [edgeString componentsSeparatedByString:@"->"];
+            NSString *fromVertex = [edgeStringArray objectAtIndex:0];
+            NSString *toVertex = [edgeStringArray objectAtIndex:1];
+            NSString *weightString = [edgeDic objectForKey:edgeString];
+            NSInteger weight = [weightString integerValue];
+            
+            if(fromVertex && fromVertex.length>0 && toVertex && toVertex.length>0 && weight) {
+                [G insertEdgeFrom:fromVertex to:toVertex withDistance:(int)weight];
+            }
+            
+        }
+    }
     
 }
 @end

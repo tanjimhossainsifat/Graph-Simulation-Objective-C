@@ -8,6 +8,8 @@
 
 #import "Graph.h"
 
+#define MAX_VERTEX_ALLOWED 8
+
 @implementation Graph {
     NSMutableArray *adjacencyList;
     NSMutableDictionary *vertexPoolDic;
@@ -22,7 +24,11 @@
     self = [super init];
     vertexCounter = 0;
     
-    adjacencyList = [[NSMutableArray alloc] init];
+    adjacencyList = [[NSMutableArray alloc] initWithCapacity:MAX_VERTEX_ALLOWED];
+    for(int i=0;i<MAX_VERTEX_ALLOWED;i++) {
+        [adjacencyList insertObject:[[NSMutableArray alloc] init] atIndex:i];
+    }
+    
     vertexPoolDic = [[NSMutableDictionary alloc] init];
     edgePoolList = [[NSMutableArray alloc] init];
     
