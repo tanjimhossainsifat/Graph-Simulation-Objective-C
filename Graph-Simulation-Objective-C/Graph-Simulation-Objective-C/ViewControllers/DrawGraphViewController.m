@@ -48,9 +48,23 @@
     CGPoint secondPoint = CGPointMake(toVertexButton.frame.origin.x+toVertexButton.frame.size.width/2, toVertexButton.frame.origin.y+toVertexButton.frame.size.height/2);
     CGPoint controlPoint = [self getQuadCurveControlPointForFirstPoint:firstPoint andSecondPoint:secondPoint];
     
+    double angle = atan2(secondPoint.x-firstPoint.x, secondPoint.y-firstPoint.y) * 180/M_PI;
+    
     UIBezierPath *edgePath = [UIBezierPath bezierPath];
     [edgePath moveToPoint:firstPoint];
     [edgePath addQuadCurveToPoint:secondPoint controlPoint:controlPoint];
+    
+    /*
+    UIBezierPath *helperPath = [UIBezierPath bezierPath];
+    [helperPath addArcWithCenter:secondPoint radius:30 startAngle:(angle)*M_PI/180 endAngle:(angle-5)*M_PI/180 clockwise:YES];
+    CGPoint arrowPoint1 = [helperPath currentPoint];
+    [helperPath addArcWithCenter:secondPoint radius:30 startAngle:(angle)*M_PI/180 endAngle:(angle+5)*M_PI/180 clockwise:NO];
+    CGPoint arrowPoint2 = [helperPath currentPoint];
+    
+    [edgePath addLineToPoint:arrowPoint1];
+    [edgePath addLineToPoint:arrowPoint2];
+    [edgePath addLineToPoint:secondPoint];
+    */
     
     CAShapeLayer *shapeLayer = [[CAShapeLayer alloc] init];
     shapeLayer.path = edgePath.CGPath;
@@ -78,21 +92,6 @@
     if(shapeLayer) [shapeLayerDic removeObjectForKey:shapeLayerDicKey];
     
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 -(void) createVertexButtons {
     
@@ -137,6 +136,24 @@
 
 #pragma mark - Button Actions
 - (IBAction)onButtonSubmit:(id)sender {
+    
+    UIAlertAction *bfsAction = [UIAlertAction actionWithTitle:@"BFS" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self showPopupToSelectRootVertex];
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [self showPopupToSelectRootVertex];
+    }];
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Select Algorithm" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+    [alert addAction:bfsAction];
+    [alert addAction:cancelAction];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self presentViewController:alert animated:YES completion:nil];
+    });
+    
+    
 }
 
 -(void) onButtonVertexButton:(UIButton *) sender {
@@ -366,5 +383,41 @@
         }
         
     }
+}
+
+-(void) showPopupToSelectRootVertex {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Select Root Vertex" message:@"From the list, choose the root vertex" preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    for (int i=0;i <_numberOfVertex;i++) {
+        
+        NSString *vertexName;
+        if(self.vertexNameType == VertexNameTypeNumerical)
+            vertexName = [NSString stringWithFormat:@"%d",i];
+        else
+            vertexName = [NSString stringWithFormat:@"%c",'A'+i];
+        
+        UIAlertAction *action = [UIAlertAction actionWithTitle:vertexName style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self initiateGraphWithRoot:i];
+        }];
+        [alert addAction:action];
+    }
+    
+    UIAlertAction *randAction = [UIAlertAction actionWithTitle:@"Random" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self initiateGraphWithRoot:rand()%_numberOfVertex];
+    }];
+    [alert addAction:randAction];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [alert addAction:cancelAction];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self presentViewController:alert animated:YES completion:nil];
+    });
+}
+
+- (void) initiateGraphWithRoot:(int) rootVertex {
+    
 }
 @end
