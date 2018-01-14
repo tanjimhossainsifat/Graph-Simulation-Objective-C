@@ -401,13 +401,18 @@
             vertexName = [NSString stringWithFormat:@"%c",'A'+i];
         
         UIAlertAction *action = [UIAlertAction actionWithTitle:vertexName style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [self initiateGraphWithRoot:i];
+            [self initiateGraphWithRoot:vertexName];
         }];
         [alert addAction:action];
     }
     
     UIAlertAction *randAction = [UIAlertAction actionWithTitle:@"Random" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self initiateGraphWithRoot:rand()%_numberOfVertex];
+        NSString *vertexName;
+        if(self.vertexNameType == VertexNameTypeNumerical)
+            vertexName = [NSString stringWithFormat:@"%d",rand()%_numberOfVertex];
+        else
+            vertexName = [NSString stringWithFormat:@"%c",'A'+(rand()%_numberOfVertex)];
+        [self initiateGraphWithRoot:vertexName];
     }];
     [alert addAction:randAction];
     
@@ -421,7 +426,7 @@
     });
 }
 
-- (void) initiateGraphWithRoot:(int) rootVertex {
+- (void) initiateGraphWithRoot:(NSString *) rootVertex {
     
     Graph *G = [[Graph alloc] init];
     
@@ -434,6 +439,19 @@
             NSInteger weight = [weightString integerValue];
             
             if(fromVertex && fromVertex.length>0 && toVertex && toVertex.length>0 && weight) {
+                
+                NSInteger fromVertexIndex = [fromVertex integerValue];
+                NSInteger toVertexIndex = [toVertex integerValue];
+                
+                if(self.vertexNameType == VertexNameTypeNumerical) {
+                    fromVertex = [NSString stringWithFormat:@"%d",(int)fromVertexIndex];
+                    toVertex = [NSString stringWithFormat:@"%d",(int)toVertexIndex];
+                }
+                else if(self.vertexNameType == VertexNameTypeAlphabetical) {
+                    fromVertex = [NSString stringWithFormat:@"%c",'A'+(int)fromVertexIndex];
+                    toVertex = [NSString stringWithFormat:@"%c",'A'+(int)toVertexIndex];
+                }
+                
                 [G insertEdgeFrom:fromVertex to:toVertex withDistance:(int)weight];
             }
             

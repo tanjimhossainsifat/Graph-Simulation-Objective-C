@@ -9,10 +9,23 @@
 #import <UIKit/UIKit.h>
 #import "Graph.h"
 
+typedef NS_ENUM(NSUInteger, BFSColor) {
+    BFSColorWhite,
+    BFSColorBrown,
+    BFSColorBlack
+};
+
 @interface BFSViewController : UIViewController
 
 @property (nonatomic, strong) Graph *G;
-@property (nonatomic, assign) int root;
+@property (nonatomic, strong) NSString *root;
 
 @property (nonatomic, strong) UINavigationController *navigationController;
+
+@property (weak, nonatomic) IBOutlet UIView *inputView;
+@property (weak, nonatomic) IBOutlet UIView *queueView;
+@property (weak, nonatomic) IBOutlet UIView *currentVertexView;
+@property (weak, nonatomic) IBOutlet UIView *adjacentVerticesView;
+@property (weak, nonatomic) IBOutlet UIView *outputView;
+
 @end

@@ -16,6 +16,7 @@
 - (void) insertEdgeFrom:(NSString *)fromVertexName to:(NSString *)toVertexName withDistance:(int) distance;
 
 -(NSArray<Vertex *> *) getAllVertices;
+-(Vertex *) getVertexForName:(NSString *) vertexName;
 -(NSArray<Edge *> *) getAllEdges;
 
 - (NSArray<Edge *> *) getAllOutgoingEdgesFromVertex:(Vertex *) vertex;
