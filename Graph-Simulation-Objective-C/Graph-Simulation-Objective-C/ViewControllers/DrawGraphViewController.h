@@ -13,6 +13,12 @@ typedef NS_ENUM(NSUInteger,VertexNameType) {
     VertexNameTypeAlphabetical
 };
 
+typedef NS_ENUM(NSUInteger, Algorithm) {
+    AlgorithmNone,
+    AlgorithmBFS,
+    AlgorithmDFS
+};
+
 @interface DrawGraphViewController : UIViewController
 
 @property (nonatomic, strong) UINavigationController *navigationController;

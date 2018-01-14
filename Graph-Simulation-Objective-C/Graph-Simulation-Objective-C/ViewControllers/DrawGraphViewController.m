@@ -8,6 +8,7 @@
 
 #import "DrawGraphViewController.h"
 #import "Graph.h"
+#import "BFSViewController.h"
 
 @interface DrawGraphViewController ()
 
@@ -21,6 +22,7 @@
     NSMutableDictionary *edgeDic;
     NSMutableArray *vertexButtonList;
     NSMutableDictionary *shapeLayerDic;
+    Algorithm selectedAlgorithm;
 }
 
 @synthesize navigationController = _navigationController;
@@ -30,6 +32,7 @@
     // Do any additional setup after loading the view from its nib.
     self.instructionLabel.hidden = YES;
     isFirstVertexSelected = NO;
+    selectedAlgorithm = AlgorithmNone;
     edgeDic = [[NSMutableDictionary alloc] init];
     vertexButtonList = [[NSMutableArray alloc] initWithCapacity:8];
     shapeLayerDic = [[NSMutableDictionary alloc] init];
@@ -139,11 +142,11 @@
 - (IBAction)onButtonSubmit:(id)sender {
     
     UIAlertAction *bfsAction = [UIAlertAction actionWithTitle:@"BFS" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        selectedAlgorithm = AlgorithmBFS;
         [self showPopupToSelectRootVertex];
     }];
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        [self showPopupToSelectRootVertex];
     }];
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Select Algorithm" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
@@ -437,5 +440,16 @@
         }
     }
     
+    if(selectedAlgorithm == AlgorithmBFS) {
+        BFSViewController *bfsVC = [[BFSViewController alloc] init];
+        bfsVC.G = G;
+        bfsVC.root = rootVertex;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.navigationController pushViewController:bfsVC animated:YES];
+        });
+    }
+    else {
+        
+    }
 }
 @end
